@@ -1,5 +1,4 @@
-version: 0.1.1
+version: 0.2.0
 commit: "%.%.%"
 files:
-  README.md:
-    - bijective-number v%.%.%
+  README.md: bijective-number v%.%.%
