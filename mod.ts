@@ -2,7 +2,6 @@
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-// TODO(kt3k): Support bigints
 /**
  * Encode the given number into bijective base-n notation with the given alphabet.
  *
@@ -10,41 +9,50 @@ const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
  * @param alphabet The alphabet to use for encoding. Defaults to "abcdefghijklmnopqrstuvwxyz".
  * @returns The encoded string.
  */
-export function encode(n: number, alphabet = ALPHABET): string {
-  if (typeof n !== "number") {
+export function encode(n: number | bigint, alphabet = ALPHABET): string {
+  let k: bigint;
+  if (typeof n === "number") {
+    if (!Number.isInteger(n)) {
+      throw new Error(`Not an integer: ${n}`);
+    }
+    if (n < 0) {
+      throw new Error(`Not a positive number: ${n}`);
+    }
+    k = BigInt(n);
+  } else if (typeof n === "bigint") {
+    if (n < 0n) {
+      throw new Error(`Not a positive number: ${n}`);
+    }
+    k = n;
+  } else {
     throw new Error(`Not a number: ${n} (${typeof n})`);
   }
-  if (!Number.isInteger(n)) {
-    throw new Error(`Not an integer: ${n}`);
-  }
-  if (n < 0) {
-    throw new Error(`Not a positive number: ${n}`);
-  }
-  if (n === 0) {
+
+  if (k === 0n) {
     return "";
   }
 
-  const base = alphabet.length;
+  const base = BigInt(alphabet.length);
 
   let len = 1;
   let m = base;
-  while (n > m) {
+  while (k > m) {
     len++;
-    n -= m;
+    k -= m;
     m *= base;
   }
 
-  n--;
+  k--;
 
   const digits = [];
 
   for (let i = 0; i < len; i++) {
-    const digit = n % base;
-    n = (n - digit) / base;
+    const digit = k % base;
+    k = (k - digit) / base;
     digits.unshift(digit);
   }
 
-  return digits.map((c) => alphabet[c]).join("");
+  return digits.map((c) => alphabet[Number(c)]).join("");
 }
 
 /**

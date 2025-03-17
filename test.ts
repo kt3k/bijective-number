@@ -14,6 +14,17 @@ Deno.test("encode", () => {
   assertEquals(encode(702), "zz");
   assertEquals(encode(703), "aaa");
   assertEquals(encode(704), "aab");
+
+  assertEquals(encode(0n), "");
+  assertEquals(encode(1n), "a");
+  assertEquals(encode(2n), "b");
+  assertEquals(encode(26n), "z");
+  assertEquals(encode(27n), "aa");
+  assertEquals(encode(28n), "ab");
+  assertEquals(encode(701n), "zy");
+  assertEquals(encode(702n), "zz");
+  assertEquals(encode(703n), "aaa");
+  assertEquals(encode(704n), "aab");
 });
 
 Deno.test("encode - invalid input", () => {
@@ -34,6 +45,12 @@ Deno.test("encode - invalid input", () => {
     Error,
     "Not a positive number: -1",
   );
+
+  assertThrows(
+    () => encode(-1n),
+    Error,
+    "Not a positive number: -1",
+  );
 });
 
 Deno.test("encode - alt alphabet", () => {
@@ -42,6 +59,12 @@ Deno.test("encode - alt alphabet", () => {
   assertEquals(encode(2, "a"), "aa");
   assertEquals(encode(3, "a"), "aaa");
   assertEquals(encode(4, "a"), "aaaa");
+
+  assertEquals(encode(0n, "a"), "");
+  assertEquals(encode(1n, "a"), "a");
+  assertEquals(encode(2n, "a"), "aa");
+  assertEquals(encode(3n, "a"), "aaa");
+  assertEquals(encode(4n, "a"), "aaaa");
 });
 
 Deno.test("decode", () => {
@@ -69,5 +92,13 @@ Deno.test("decode - invalid input", () => {
     },
     Error,
     "Not a valid string: a0 (alphabet: abcdefghijklmnopqrstuvwxyz)",
+  );
+
+  assertThrows(
+    () => {
+      decode("ab", "a");
+    },
+    Error,
+    "Not a valid string: ab (alphabet: a)",
   );
 });
