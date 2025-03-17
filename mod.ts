@@ -3,8 +3,14 @@
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
 // TODO(kt3k): Support bigints
-/** Encode the given number into bijective base-n notation with the given alphabet. */
-export function encode(n: number, alphabet = ALPHABET) {
+/**
+ * Encode the given number into bijective base-n notation with the given alphabet.
+ *
+ * @param n The number to encode.
+ * @param alphabet The alphabet to use for encoding. Defaults to "abcdefghijklmnopqrstuvwxyz".
+ * @returns The encoded string.
+ */
+export function encode(n: number, alphabet = ALPHABET): string {
   if (typeof n !== "number") {
     throw new Error(`Not a number: ${n} (${typeof n})`);
   }
@@ -41,7 +47,13 @@ export function encode(n: number, alphabet = ALPHABET) {
   return digits.map((c) => alphabet[c]).join("");
 }
 
-/** Decode the given bijective base-n string to a bigint with the given alphabet. */
+/**
+ * Decode the given bijective base-n string to a bigint with the given alphabet.
+ *
+ * @param s The string to decode.
+ * @param alphabet The alphabet to use for decoding. Defaults to "abcdefghijklmnopqrstuvwxyz".
+ * @returns The decoded bigint.
+ */
 export function decode(s: string, alphabet = ALPHABET): bigint {
   if (typeof s !== "string") {
     throw new Error(`Not a string: ${s} (${typeof s})`);

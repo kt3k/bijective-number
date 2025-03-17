@@ -1,7 +1,7 @@
 // Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT License.
 
 import { decode, encode } from "./mod.ts";
-import { assertEquals, assertThrows } from "std/assert/mod.ts";
+import { assertEquals, assertThrows } from "@std/assert";
 
 Deno.test("encode", () => {
   assertEquals(encode(0), "");

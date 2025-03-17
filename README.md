@@ -1,9 +1,10 @@
-# bijective_base_n v0.1.1
+# bijective-number v0.1.1
 
-[![ci](https://github.com/kt3k/bijective_base_n/actions/workflows/ci.yml/badge.svg)](https://github.com/kt3k/bijective_base_n/actions/workflows/ci.yml)
+[![ci](https://github.com/kt3k/bijective-number/actions/workflows/ci.yml/badge.svg)](https://github.com/kt3k/bijective-number/actions/workflows/ci.yml)
 
 Convert numbers to
-[bijective base-n](https://en.wikipedia.org/wiki/Bijective_numeration) notation.
+[bijective numbers](https://en.wikipedia.org/wiki/Bijective_numeration) of the
+given alphabet. It uses lower 'a' to 'z' as the default alphabet.
 
 ```
 0 -> (empty string)
@@ -27,11 +28,20 @@ This system is used, for example, for labeling columns in Excel.
 
 # Usage
 
+Install to Deno by:
+
+```sh
+deno i jsr:@kt3k/bijective-number
+```
+
+Install to Node or other systems:
+
+```sh
+npx jsr add @kt3k/bijective-number
+```
+
 ```js
-import {
-  decode,
-  encode,
-} from "https://deno.land/x/bijective_base_n@v0.1.1/mod.ts";
+import { decode, encode } from "@kt3k/bijective-number";
 
 encode(0); // => ""
 encode(1); // => a
