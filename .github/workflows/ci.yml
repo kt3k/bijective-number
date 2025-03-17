@@ -2,14 +2,19 @@ name: ci
 on:
   push:
     branches: main
+    tags: "*"
   pull_request:
     branches: main
+permissions:
+  contents: read
+  id-token: write
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
       - run: deno fmt --check
       - run: deno lint
       - run: deno test
+      - run: deno -A jsr:@david/publish-on-tag@0.2.0
