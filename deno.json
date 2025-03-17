@@ -1,5 +1,6 @@
 {
   "name": "@kt3k/bijective-number",
+  "version": "0.2.0",
   "exports": {
     ".": "./mod.ts"
   },
