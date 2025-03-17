@@ -1,4 +1,4 @@
-# bijective-number v0.2.0
+# bijective-number v0.2.1
 
 [![ci](https://github.com/kt3k/bijective-number/actions/workflows/ci.yml/badge.svg)](https://github.com/kt3k/bijective-number/actions/workflows/ci.yml)
 
